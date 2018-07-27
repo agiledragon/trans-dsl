@@ -8,7 +8,7 @@ import(
     "github.com/agiledragon/trans-dsl/test/context"
 )
 
-func newSuccTrans() *transdsl.Transaction {
+func newFirstTrans() *transdsl.Transaction {
     trans := &transdsl.Transaction {
         Fragments: []transdsl.Fragment{
             new(action.StubAttachSomething),
@@ -29,7 +29,7 @@ func TestFirstTrans(t *testing.T) {
                     Y: 1,
                 },
             }
-            trans := newSuccTrans()
+            trans := newFirstTrans()
             err := trans.Exec(transInfo)
             So(err, ShouldEqual, nil)
             So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 8)
@@ -42,7 +42,7 @@ func TestFirstTrans(t *testing.T) {
                     Y: 1,
                 },
             }
-            trans := newSuccTrans()
+            trans := newFirstTrans()
             err := trans.Exec(transInfo)
             So(err, ShouldNotEqual, nil)
             So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 0)
