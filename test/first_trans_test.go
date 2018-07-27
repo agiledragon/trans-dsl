@@ -19,7 +19,7 @@ func newFirstTrans() *transdsl.Transaction {
 }
 
 func TestFirstTrans(t *testing.T) {
-
+    trans := newFirstTrans()
     Convey("first trrans test", t, func() {
 
         Convey("trans exec succ", func() {
@@ -29,7 +29,6 @@ func TestFirstTrans(t *testing.T) {
                     Y: 1,
                 },
             }
-            trans := newFirstTrans()
             err := trans.Exec(transInfo)
             So(err, ShouldEqual, nil)
             So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 8)
@@ -42,7 +41,6 @@ func TestFirstTrans(t *testing.T) {
                     Y: 1,
                 },
             }
-            trans := newFirstTrans()
             err := trans.Exec(transInfo)
             So(err, ShouldNotEqual, nil)
             So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 0)
