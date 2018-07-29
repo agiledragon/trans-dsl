@@ -43,7 +43,7 @@ func TestIfTrans(t *testing.T) {
 		Convey("trans exec succ when spec is true", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "abc",
+					Abc: "abc",
 					Y: 1,
 				},
 			}
@@ -55,7 +55,7 @@ func TestIfTrans(t *testing.T) {
 		Convey("trans exec succ when spec is false", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "def",
+					Abc: "def",
 					Y: 1,
 				},
 			}
@@ -64,10 +64,11 @@ func TestIfTrans(t *testing.T) {
 			So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 1)
 		})
 
-		Convey("ifspec rollback", func() {
+		Convey("iffrag rollback", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					X: "test",
+					Abc: "abc",
 					Y: 1,
 				},
 			}
@@ -85,7 +86,7 @@ func TestElseTrans(t *testing.T) {
 		Convey("trans exec succ when spec is false", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "def",
+					Abc: "def",
 					Y: 1,
 				},
 			}
@@ -94,10 +95,11 @@ func TestElseTrans(t *testing.T) {
 			So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 3)
 		})
 
-		Convey("elsespec rollback", func() {
+		Convey("elsefrag rollback", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					X: "test",
+					Abc: "def",
 					Y: 1,
 				},
 			}

@@ -69,7 +69,7 @@ func TestAllOfTrans(t *testing.T) {
 		Convey("all specs are true", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "abc",
+					Abc: "abc",
 					Y: 1,
 				},
 			}
@@ -81,7 +81,7 @@ func TestAllOfTrans(t *testing.T) {
 		Convey("one of specs is false", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "def",
+					Abc: "def",
 					Y: 1,
 				},
 			}
@@ -99,7 +99,7 @@ func TestAnyOfTrans(t *testing.T) {
 		Convey("all specs are true", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "abc",
+					Abc: "abc",
 					Y: 1,
 				},
 			}
@@ -111,7 +111,7 @@ func TestAnyOfTrans(t *testing.T) {
 		Convey("one of specs is false", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "def",
+					Abc: "def",
 					Y: 1,
 				},
 			}
@@ -129,25 +129,25 @@ func TestNotTrans(t *testing.T) {
 		Convey("spec is true", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "abc",
-					Y: 1,
-				},
-			}
-			err := trans.Start(transInfo)
-			So(err, ShouldEqual, nil)
-			So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 1)
-		})
-
-		Convey("spec is false", func() {
-			transInfo := &transdsl.TransInfo{
-				AppInfo: &context.StubInfo{
-					X: "def",
+					Abc: "def",
 					Y: 1,
 				},
 			}
 			err := trans.Start(transInfo)
 			So(err, ShouldEqual, nil)
 			So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 2)
+		})
+		
+		Convey("spec is false", func() {
+			transInfo := &transdsl.TransInfo{
+				AppInfo: &context.StubInfo{
+					Abc: "abc",
+					Y: 1,
+				},
+			}
+			err := trans.Start(transInfo)
+			So(err, ShouldEqual, nil)
+			So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 1)
 		})
 	})
 }

@@ -1,6 +1,10 @@
 package context
 
 type StubInfo struct {
-	X string
-	Y int
+	X   string
+	Abc string
+	Y   int
+	P1  int
+	P2  int
+	P3  int
 }
