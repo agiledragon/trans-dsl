@@ -1,5 +1,5 @@
 package transdsl
 
 type Specification interface {
-    Ok(transInfo *TransInfo) bool
+	Ok(transInfo *TransInfo) bool
 }
