@@ -5,18 +5,18 @@ import (
     "github.com/agiledragon/trans-dsl/test/context"
 )
 
-type StubAttachSomething struct {
+type StubConnectDef struct {
 
 }
 
 
-func (this *StubAttachSomething) Exec(transInfo *transdsl.TransInfo) error {
+func (this *StubConnectDef) Exec(transInfo *transdsl.TransInfo) error {
     stubInfo := transInfo.AppInfo.(*context.StubInfo)
-    stubInfo.Y = 8
+    stubInfo.Y = 3
     return nil
 }
 
-func (this *StubAttachSomething) Rollback(transInfo *transdsl.TransInfo) {
+func (this *StubConnectDef) Rollback(transInfo *transdsl.TransInfo) {
     stubInfo := transInfo.AppInfo.(*context.StubInfo)
-    stubInfo.Y = 0
+    stubInfo.Y = -1
 }

@@ -20,7 +20,7 @@ func newFirstTrans() *transdsl.Transaction {
 
 func TestFirstTrans(t *testing.T) {
     trans := newFirstTrans()
-    Convey("first trans test", t, func() {
+    Convey("TestFirstTrans", t, func() {
 
         Convey("trans exec succ", func() {
             transInfo := &transdsl.TransInfo{

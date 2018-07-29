@@ -1,22 +1,23 @@
 package action
 
+
 import (
     "github.com/agiledragon/trans-dsl"
     "github.com/agiledragon/trans-dsl/test/context"
 )
 
-type StubAttachSomething struct {
+type StubConnectAbc struct {
 
 }
 
 
-func (this *StubAttachSomething) Exec(transInfo *transdsl.TransInfo) error {
+func (this *StubConnectAbc) Exec(transInfo *transdsl.TransInfo) error {
     stubInfo := transInfo.AppInfo.(*context.StubInfo)
-    stubInfo.Y = 8
+    stubInfo.Y = 2
     return nil
 }
 
-func (this *StubAttachSomething) Rollback(transInfo *transdsl.TransInfo) {
+func (this *StubConnectAbc) Rollback(transInfo *transdsl.TransInfo) {
     stubInfo := transInfo.AppInfo.(*context.StubInfo)
     stubInfo.Y = 0
 }

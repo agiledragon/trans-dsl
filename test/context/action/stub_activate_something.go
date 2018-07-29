@@ -20,7 +20,7 @@ func (this *StubActivateSomething) Exec(transInfo *transdsl.TransInfo) error {
     return nil
 }
 
-func (this *StubActivateSomething) RollBack(transInfo *transdsl.TransInfo) {
+func (this *StubActivateSomething) Rollback(transInfo *transdsl.TransInfo) {
 
 }
 

@@ -3,7 +3,7 @@ package transdsl
 
 type Fragment interface {
     Exec(transInfo *TransInfo) error
-    RollBack(transInfo *TransInfo)
+    Rollback(transInfo *TransInfo)
 }
 
 func forEachFragments(fragments []Fragment, transInfo *TransInfo) (int, error) {
@@ -22,6 +22,6 @@ func backEachFragments(fragments []Fragment, transInfo *TransInfo, index int) {
     }
     index--
     for ; index >= 0; index-- {
-        fragments[index].RollBack(transInfo)
+        fragments[index].Rollback(transInfo)
     }
 }
