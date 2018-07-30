@@ -19,3 +19,15 @@ func (this *Succ) Exec(transInfo *TransInfo) error {
 func (this *Succ) Rollback(transInfo *TransInfo) {
 
 }
+
+type Fail struct {
+    ErrCode error
+}
+
+func (this *Fail) Exec(transInfo *TransInfo) error {
+    return this.ErrCode
+}
+
+func (this *Fail) Rollback(transInfo *TransInfo) {
+
+}
