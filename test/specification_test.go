@@ -137,7 +137,7 @@ func TestNotTrans(t *testing.T) {
 			So(err, ShouldEqual, nil)
 			So(transInfo.AppInfo.(*context.StubInfo).Y, ShouldEqual, 2)
 		})
-		
+
 		Convey("spec is false", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{

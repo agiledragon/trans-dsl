@@ -11,6 +11,7 @@ type StubAttachSomething struct {
 func (this *StubAttachSomething) Exec(transInfo *transdsl.TransInfo) error {
 	stubInfo := transInfo.AppInfo.(*context.StubInfo)
 	stubInfo.Y = 8
+	stubInfo.SpecialNum = 10
 	return nil
 }
 

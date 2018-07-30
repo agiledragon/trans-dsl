@@ -8,6 +8,10 @@ type Fragment interface {
 func forEachFragments(fragments []Fragment, transInfo *TransInfo) (int, error) {
 	for i, fragment := range fragments {
 		err := fragment.Exec(transInfo)
+		if err == ErrSucc {
+			return 0, nil
+		}
+		
 		if err != nil {
 			return i, err
 		}

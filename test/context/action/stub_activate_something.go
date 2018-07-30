@@ -15,6 +15,7 @@ func (this *StubActivateSomething) Exec(transInfo *transdsl.TransInfo) error {
 	if stubInfo.X == "test" {
 		return errors.New("something wrong")
 	}
+	stubInfo.SpecialNum = 20
 	return nil
 }
 
