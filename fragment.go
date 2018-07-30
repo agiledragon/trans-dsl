@@ -11,7 +11,7 @@ func forEachFragments(fragments []Fragment, transInfo *TransInfo) (int, error) {
 		if err == ErrSucc {
 			return 0, nil
 		}
-		
+
 		if err != nil {
 			return i, err
 		}
