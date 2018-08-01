@@ -2,8 +2,8 @@ package transdsl
 
 type TransInfo struct {
 	//framework paras
-	Times   uint
-	LoopIdx uint
+	Times   int
+	LoopIdx int
 
 	//user info
 	AppInfo interface{}

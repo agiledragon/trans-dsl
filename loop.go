@@ -4,6 +4,7 @@ type Loop struct {
 	Spec      Specification
 	Fragments []Fragment
 	FuncVar   func() Fragment
+	times int
 }
 
 func (this *Loop) Exec(transInfo *TransInfo) error {
@@ -14,33 +15,21 @@ func (this *Loop) Exec(transInfo *TransInfo) error {
 }
 
 func (this *Loop) RollBack(transInfo *TransInfo) {
-	for i := transInfo.Times - 1; i >= 0; i-- {
+	for i := this.times - 1; i >= 0; i-- {
 		transInfo.LoopIdx = i
 		this.Fragments[i].Rollback(transInfo)
 	}
 }
 
 func (this *Loop) doWithTimes(transInfo *TransInfo) error {
-	this.Fragments = make([]Fragment, transInfo.Times)
-	for i := uint(0); i < transInfo.Times; i++ {
+	this.times = transInfo.Times
+	this.Fragments = make([]Fragment, this.times)
+	for i := 0; i < this.times; i++ {
 		transInfo.LoopIdx = i
 		this.Fragments[i] = this.FuncVar()
 		err := this.Fragments[i].Exec(transInfo)
 		if err != nil {
-
-			if err == ErrBreak {
-				break
-			}
-
-			if err == ErrContinue {
-				continue
-			}
-
-			if i == 0 {
-				return err
-			}
-			i--
-			for j := i; j >= 0; j-- {
+			for j := i - 1; j >= 0; j-- {
 				transInfo.LoopIdx = j
 				this.Fragments[j].Rollback(transInfo)
 			}
@@ -51,30 +40,21 @@ func (this *Loop) doWithTimes(transInfo *TransInfo) error {
 }
 
 func (this *Loop) doWithoutTimes(transInfo *TransInfo) error {
-	this.Fragments = make([]Fragment, transInfo.Times)
+	this.Fragments = make([]Fragment, this.times)
 	for {
-		transInfo.LoopIdx = transInfo.Times
-		transInfo.Times++
+		transInfo.LoopIdx = this.times
+		this.times++
 		this.Fragments = append(this.Fragments, this.FuncVar())
 		err := this.Fragments[transInfo.LoopIdx].Exec(transInfo)
 		if err != nil {
-			if this.Spec.Ok(transInfo) || err == ErrBreak {
-				break
-			}
-
-			if err == ErrContinue {
-				continue
-			}
-
-			if transInfo.LoopIdx == 0 {
-				return err
-			}
-			transInfo.LoopIdx--
-			for j := transInfo.LoopIdx; j >= 0; j-- {
+			for j := transInfo.LoopIdx - 1; j >= 0; j-- {
 				transInfo.LoopIdx = j
 				this.Fragments[j].Rollback(transInfo)
 			}
 			return err
+		}
+		if this.Spec.Ok(transInfo) {
+			break
 		}
 	}
 	return nil

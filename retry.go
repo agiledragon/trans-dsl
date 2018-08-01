@@ -3,16 +3,16 @@ package transdsl
 import "time"
 
 type Retry struct {
-	MaxTimes uint
+	MaxTimes int
 	TimeLen  time.Duration
-	Frag     Fragment
+	Fragment Fragment
 	Errs     []error
 }
 
 func (this *Retry) Exec(transInfo *TransInfo) error {
 	var err error
-	for i := uint(0); i < this.MaxTimes; i++ {
-		err = this.Frag.Exec(transInfo)
+	for i := 0; i < this.MaxTimes; i++ {
+		err = this.Fragment.Exec(transInfo)
 		if err == nil {
 			return nil
 		}
@@ -29,5 +29,5 @@ func (this *Retry) Exec(transInfo *TransInfo) error {
 }
 
 func (this *Retry) Rollback(transInfo *TransInfo) {
-
+	this.Fragment.Rollback(transInfo)
 }
