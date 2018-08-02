@@ -18,7 +18,7 @@ func (this *Retry) Exec(transInfo *TransInfo) error {
 		}
 
 		for _, e := range this.Errs {
-			if e.Error() == err.Error() {
+			if isEqual(e, err) {
 				return err
 			}
 		}

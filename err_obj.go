@@ -10,6 +10,10 @@ var(
     ErrBreak = errors.New("loop break")
 )
 
+func isEqual(leftErr, rightErr error) bool {
+    return leftErr.Error() == rightErr.Error()
+}
+
 type Succ struct {
 
 }
@@ -31,29 +35,5 @@ func (this *Fail) Exec(transInfo *TransInfo) error {
 }
 
 func (this *Fail) Rollback(transInfo *TransInfo) {
-
-}
-
-type Continue struct {
-
-}
-
-func (this *Continue) Exec(transInfo *TransInfo) error {
-    return ErrContinue
-}
-
-func (this *Continue) Rollback(transInfo *TransInfo) {
-
-}
-
-type Break struct {
-
-}
-
-func (this *Break) Exec(transInfo *TransInfo) error {
-    return ErrBreak
-}
-
-func (this *Break) Rollback(transInfo *TransInfo) {
 
 }
