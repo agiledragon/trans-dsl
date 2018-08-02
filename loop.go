@@ -8,7 +8,7 @@ type Loop struct {
 	times        int
 }
 
-func match(expected error, actuals []error) boo {
+func match(expected error, actuals []error) bool {
 	for _, actual := range actuals {
 		if isEqual(expected, actual) {
 			return true

@@ -8,4 +8,5 @@ type StubInfo struct {
 	P2         int
 	P3         int
 	SpecialNum int
+	FailTimes  int
 }

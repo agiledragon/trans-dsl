@@ -4,7 +4,7 @@ import "time"
 
 type Retry struct {
 	MaxTimes int
-	TimeLen  time.Duration
+	TimeLen  time.Duration  //ms
 	Fragment Fragment
 	Errs     []error
 }
