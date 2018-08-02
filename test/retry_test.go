@@ -65,8 +65,7 @@ func TestTryTrans(t *testing.T) {
                 },
             }
             err := trans.Start(transInfo)
-            So(err, ShouldNotEqual, nil)
-            So(err.Error(), ShouldEqual, errors.New("panic").Error())
+            So(err.Error(), ShouldEqual, "panic")
         })
     })
 }

@@ -1,10 +1,10 @@
 package transdsl
 
 type Loop struct {
-	Fragments    []Fragment
 	FuncVar      func() Fragment
 	BreakErrs    []error
 	ContinueErrs []error
+	fragments    []Fragment
 	times        int
 }
 
@@ -19,11 +19,11 @@ func match(expected error, actuals []error) bool {
 
 func (this *Loop) Exec(transInfo *TransInfo) error {
 	this.times = transInfo.Times
-	this.Fragments = make([]Fragment, this.times)
+	this.fragments = make([]Fragment, this.times)
 	for i := 0; i < this.times; i++ {
 		transInfo.LoopIdx = i
-		this.Fragments[i] = this.FuncVar()
-		err := this.Fragments[i].Exec(transInfo)
+		this.fragments[i] = this.FuncVar()
+		err := this.fragments[i].Exec(transInfo)
 		if err != nil {
 			if match(ErrBreak, this.BreakErrs) {
 				break
@@ -33,7 +33,7 @@ func (this *Loop) Exec(transInfo *TransInfo) error {
 			}
 			for j := i - 1; j >= 0; j-- {
 				transInfo.LoopIdx = j
-				this.Fragments[j].Rollback(transInfo)
+				this.fragments[j].Rollback(transInfo)
 			}
 			return err
 		}
@@ -41,9 +41,9 @@ func (this *Loop) Exec(transInfo *TransInfo) error {
 	return nil
 }
 
-func (this *Loop) RollBack(transInfo *TransInfo) {
+func (this *Loop) Rollback(transInfo *TransInfo) {
 	for i := this.times - 1; i >= 0; i-- {
 		transInfo.LoopIdx = i
-		this.Fragments[i].Rollback(transInfo)
+		this.fragments[i].Rollback(transInfo)
 	}
 }

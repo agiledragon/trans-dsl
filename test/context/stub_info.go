@@ -9,4 +9,5 @@ type StubInfo struct {
 	P3         int
 	SpecialNum int
 	FailTimes  int
+	LoopValue int
 }

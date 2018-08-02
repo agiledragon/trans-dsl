@@ -9,7 +9,7 @@ import (
     "testing"
 )
 
-func newApplyProcedure() *transdsl.Procedure {
+func newApplyProcedure() transdsl.Fragment {
     procedure := &transdsl.Procedure{
         Fragments: []transdsl.Fragment{
             new(action.StubGetSomething),
