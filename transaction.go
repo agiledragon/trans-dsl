@@ -11,3 +11,12 @@ func (this *Transaction) Start(transInfo *TransInfo) error {
 	}
 	return err
 }
+
+func (this *Transaction) HandleEvent(EventId string, transInfo *TransInfo) error {
+	if EventId != transInfo.EventId {
+		return ErrUnexpectedEvent
+	}
+	transInfo.Ch <- struct{}{}
+	transInfo.EventId = ""
+	return nil
+}
