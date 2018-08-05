@@ -9,16 +9,16 @@ import (
 	"time"
 )
 
-var eventId = "stub money resp"
+var eventId = "assign cmd"
 
 func newWaitTrans() *transdsl.Transaction {
 	trans := &transdsl.Transaction{
 		Fragments: []transdsl.Fragment{
-			new(action.StubMoneyReq),
+			new(action.StubTransferMoney),
 			&transdsl.Wait{
 				EventId:  eventId,
 				Timeout:  100,
-				Fragment: new(action.StubMoneyResp),
+				Fragment: new(action.StubAssignCmd),
 			},
 			new(action.StubAttachSomething),
 			new(action.StubActivateSomething),
