@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func newTryTrans() *transdsl.Transaction {
+func newRetryTrans() *transdsl.Transaction {
 	trans := &transdsl.Transaction{
 		Fragments: []transdsl.Fragment{
 			&transdsl.Retry{
@@ -23,9 +23,9 @@ func newTryTrans() *transdsl.Transaction {
 	return trans
 }
 
-func TestTryTrans(t *testing.T) {
-	trans := newTryTrans()
-	Convey("TestTryTrans", t, func() {
+func TestRetryTrans(t *testing.T) {
+	trans := newRetryTrans()
+	Convey("TestRetryTrans", t, func() {
 
 		Convey("trans exec succ when fail time is 1", func() {
 			transInfo := &transdsl.TransInfo{
