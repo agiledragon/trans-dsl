@@ -14,6 +14,7 @@ type Wait struct {
 func (this *Wait) Exec(transInfo *TransInfo) error {
     transInfo.EventId = this.EventId
     tc := make(chan struct{})
+    defer close（tc）
     go func() {
         <-time.After(this.Timeout * time.Millisecond)
         tc <- struct{}{}
