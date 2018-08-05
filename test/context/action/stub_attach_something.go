@@ -1,9 +1,9 @@
 package action
 
 import (
+	"errors"
 	"github.com/agiledragon/trans-dsl"
 	"github.com/agiledragon/trans-dsl/test/context"
-	"errors"
 )
 
 type StubAttachSomething struct {

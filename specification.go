@@ -12,7 +12,6 @@ func (this *Not) Ok(transInfo *TransInfo) bool {
 	return !this.Spec.Ok(transInfo)
 }
 
-
 type AllOf struct {
 	Specs []Specification
 }

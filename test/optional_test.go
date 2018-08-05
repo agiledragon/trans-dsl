@@ -44,7 +44,7 @@ func TestIfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "abc",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -56,7 +56,7 @@ func TestIfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -67,9 +67,9 @@ func TestIfTrans(t *testing.T) {
 		Convey("iffrag rollback", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "test",
+					X:   "test",
 					Abc: "abc",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -87,7 +87,7 @@ func TestElseTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -98,9 +98,9 @@ func TestElseTrans(t *testing.T) {
 		Convey("elsefrag rollback", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "test",
+					X:   "test",
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
