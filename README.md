@@ -77,7 +77,7 @@ func TestIfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "abc",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -89,7 +89,7 @@ func TestIfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -100,9 +100,9 @@ func TestIfTrans(t *testing.T) {
 		Convey("iffrag rollback", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "test",
+					X:   "test",
 					Abc: "abc",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -120,7 +120,7 @@ func TestElseTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -131,9 +131,9 @@ func TestElseTrans(t *testing.T) {
 		Convey("elsefrag rollback", func() {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
-					X: "test",
+					X:   "test",
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -235,78 +235,79 @@ func TestLoopTrans(t *testing.T) {
 	})
 }
 
+
 ```
 
 ### retry
 ```go
 import (
-    "github.com/agiledragon/trans-dsl"
-    "github.com/agiledragon/trans-dsl/test/context"
-    "github.com/agiledragon/trans-dsl/test/context/action"
-    . "github.com/smartystreets/goconvey/convey"
-    "testing"
-    "errors"
+	"errors"
+	"github.com/agiledragon/trans-dsl"
+	"github.com/agiledragon/trans-dsl/test/context"
+	"github.com/agiledragon/trans-dsl/test/context/action"
+	. "github.com/smartystreets/goconvey/convey"
+	"testing"
 )
 
-func newTryTrans() *transdsl.Transaction {
-    trans := &transdsl.Transaction{
-        Fragments: []transdsl.Fragment{
-            &transdsl.Retry{
-                MaxTimes: 3,
-                TimeLen: 100,
-                Fragment: new(action.StubConnectServer),
-                Errs: []error{errors.New("fatal"), errors.New("panic")},
-            },
-        },
-    }
-    return trans
+func newRetryTrans() *transdsl.Transaction {
+	trans := &transdsl.Transaction{
+		Fragments: []transdsl.Fragment{
+			&transdsl.Retry{
+				MaxTimes: 3,
+				TimeLen:  100,
+				Fragment: new(action.StubConnectServer),
+				Errs:     []error{errors.New("fatal"), errors.New("panic")},
+			},
+		},
+	}
+	return trans
 }
 
-func TestTryTrans(t *testing.T) {
-    trans := newTryTrans()
-    Convey("TestTryTrans", t, func() {
+func TestRetryTrans(t *testing.T) {
+	trans := newRetryTrans()
+	Convey("TestRetryTrans", t, func() {
 
-        Convey("trans exec succ when fail time is 1", func() {
-            transInfo := &transdsl.TransInfo{
-                AppInfo: &context.StubInfo{
-                    FailTimes: 1,
-                },
-            }
-            err := trans.Start(transInfo)
-            So(err, ShouldEqual, nil)
-        })
+		Convey("trans exec succ when fail time is 1", func() {
+			transInfo := &transdsl.TransInfo{
+				AppInfo: &context.StubInfo{
+					FailTimes: 1,
+				},
+			}
+			err := trans.Start(transInfo)
+			So(err, ShouldEqual, nil)
+		})
 
-        Convey("trans exec succ when fail time is 2", func() {
-            transInfo := &transdsl.TransInfo{
-                AppInfo: &context.StubInfo{
-                    FailTimes: 2,
-                },
-            }
-            err := trans.Start(transInfo)
-            So(err, ShouldEqual, nil)
-        })
+		Convey("trans exec succ when fail time is 2", func() {
+			transInfo := &transdsl.TransInfo{
+				AppInfo: &context.StubInfo{
+					FailTimes: 2,
+				},
+			}
+			err := trans.Start(transInfo)
+			So(err, ShouldEqual, nil)
+		})
 
-        Convey("trans exec fail when fail time is 3", func() {
-            transInfo := &transdsl.TransInfo{
-                AppInfo: &context.StubInfo{
-                    FailTimes: 3,
-                },
-            }
-            err := trans.Start(transInfo)
-            So(err, ShouldNotEqual, nil)
-        })
+		Convey("trans exec fail when fail time is 3", func() {
+			transInfo := &transdsl.TransInfo{
+				AppInfo: &context.StubInfo{
+					FailTimes: 3,
+				},
+			}
+			err := trans.Start(transInfo)
+			So(err, ShouldNotEqual, nil)
+		})
 
-        Convey("trans exec fail when error string is panic", func() {
-            transInfo := &transdsl.TransInfo{
-                AppInfo: &context.StubInfo{
-                    FailTimes: 1,
-                    Y: -1,
-                },
-            }
-            err := trans.Start(transInfo)
-            So(err.Error(), ShouldEqual, "panic")
-        })
-    })
+		Convey("trans exec fail when error string is panic", func() {
+			transInfo := &transdsl.TransInfo{
+				AppInfo: &context.StubInfo{
+					FailTimes: 1,
+					Y:         -1,
+				},
+			}
+			err := trans.Start(transInfo)
+			So(err.Error(), ShouldEqual, "panic")
+		})
+	})
 }
 
 ```
@@ -400,6 +401,7 @@ func TestWaitTrans(t *testing.T) {
 	})
 }
 
+
 ```
 
 ### allof
@@ -440,7 +442,7 @@ func TestAllOfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "abc",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -452,7 +454,7 @@ func TestAllOfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -461,66 +463,67 @@ func TestAllOfTrans(t *testing.T) {
 		})
 	})
 }
+
 ```
 
 ### fail
 ```go
 import (
-    "github.com/agiledragon/trans-dsl"
-    "github.com/agiledragon/trans-dsl/test/context"
-    "github.com/agiledragon/trans-dsl/test/context/action"
-    . "github.com/smartystreets/goconvey/convey"
-    "testing"
-    "github.com/agiledragon/trans-dsl/test/context/spec"
-    "errors"
+	"errors"
+	"github.com/agiledragon/trans-dsl"
+	"github.com/agiledragon/trans-dsl/test/context"
+	"github.com/agiledragon/trans-dsl/test/context/action"
+	"github.com/agiledragon/trans-dsl/test/context/spec"
+	. "github.com/smartystreets/goconvey/convey"
+	"testing"
 )
 
 var ErrResourceInsufficient = errors.New("resource insufficient")
 
 func newFailTrans() *transdsl.Transaction {
-    trans := &transdsl.Transaction{
-        Fragments: []transdsl.Fragment{
-            new(action.StubAttachSomething),
-            &transdsl.Optional{
-                Spec: new(spec.IsSomeResourceInsufficient),
-                IfFrag: &transdsl.Fail{
-                    ErrCode: ErrResourceInsufficient,
-                },
-            },
-            new(action.StubActivateSomething),
-        },
-    }
-    return trans
+	trans := &transdsl.Transaction{
+		Fragments: []transdsl.Fragment{
+			new(action.StubAttachSomething),
+			&transdsl.Optional{
+				Spec: new(spec.IsSomeResourceInsufficient),
+				IfFrag: &transdsl.Fail{
+					ErrCode: ErrResourceInsufficient,
+				},
+			},
+			new(action.StubActivateSomething),
+		},
+	}
+	return trans
 }
 
 func TestFailTrans(t *testing.T) {
-    trans := newFailTrans()
-    Convey("TestFailTrans", t, func() {
+	trans := newFailTrans()
+	Convey("TestFailTrans", t, func() {
 
-        Convey("spec is true", func() {
-            transInfo := &transdsl.TransInfo{
-                AppInfo: &context.StubInfo{
-                    X: "insufficient",
-                    SpecialNum: 1,
-                },
-            }
-            err := trans.Start(transInfo)
-            So(err, ShouldEqual, ErrResourceInsufficient)
-            So(transInfo.AppInfo.(*context.StubInfo).SpecialNum, ShouldEqual, 10)
-        })
+		Convey("spec is true", func() {
+			transInfo := &transdsl.TransInfo{
+				AppInfo: &context.StubInfo{
+					X:          "insufficient",
+					SpecialNum: 1,
+				},
+			}
+			err := trans.Start(transInfo)
+			So(err, ShouldEqual, ErrResourceInsufficient)
+			So(transInfo.AppInfo.(*context.StubInfo).SpecialNum, ShouldEqual, 10)
+		})
 
-        Convey("spec is false", func() {
-            transInfo := &transdsl.TransInfo{
-                AppInfo: &context.StubInfo{
-                    X: "sufficient",
-                    SpecialNum: 1,
-                },
-            }
-            err := trans.Start(transInfo)
-            So(err, ShouldEqual, nil)
-            So(transInfo.AppInfo.(*context.StubInfo).SpecialNum, ShouldEqual, 20)
-        })
-    })
+		Convey("spec is false", func() {
+			transInfo := &transdsl.TransInfo{
+				AppInfo: &context.StubInfo{
+					X:          "sufficient",
+					SpecialNum: 1,
+				},
+			}
+			err := trans.Start(transInfo)
+			So(err, ShouldEqual, nil)
+			So(transInfo.AppInfo.(*context.StubInfo).SpecialNum, ShouldEqual, 20)
+		})
+	})
 }
 
 ```
