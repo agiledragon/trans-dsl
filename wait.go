@@ -13,15 +13,18 @@ type Wait struct {
 func (this *Wait) Exec(transInfo *TransInfo) error {
 	transInfo.EventId = this.EventId
 	tc := make(chan struct{})
-  defer close（tc）
+
 	go func() {
 		<-time.After(this.Timeout * time.Millisecond)
 		tc <- struct{}{}
+		close(tc)
 	}()
+
 	select {
 	case <-transInfo.Ch:
 		return this.Fragment.Exec(transInfo)
 	case <-tc:
+		transInfo.EventId = ""
 		return ErrTimeout
 	}
 
