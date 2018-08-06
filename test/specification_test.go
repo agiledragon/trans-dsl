@@ -70,7 +70,7 @@ func TestAllOfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "abc",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -82,7 +82,7 @@ func TestAllOfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -100,7 +100,7 @@ func TestAnyOfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "abc",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -112,7 +112,7 @@ func TestAnyOfTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -130,7 +130,7 @@ func TestNotTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "def",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
@@ -142,7 +142,7 @@ func TestNotTrans(t *testing.T) {
 			transInfo := &transdsl.TransInfo{
 				AppInfo: &context.StubInfo{
 					Abc: "abc",
-					Y: 1,
+					Y:   1,
 				},
 			}
 			err := trans.Start(transInfo)
