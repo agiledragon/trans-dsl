@@ -6,11 +6,11 @@ trans-dsl is a transaction model framework in golang,  can be used in complex bu
 In some complex domains, a business process may involve the interaction of multiple messages, which may be synchronous messages, asynchronous messages, or even system calls. We explicitly model the operation behavior of message interaction, and call the operation behavior of a message interaction as Action, then the flow chart of the business corresponds to an Action sequence. In general, a single scenario business process corresponds to a transaction process. Based on the transaction model framework, business developers can not only express all business processes in a simple and complete manner at a higher level, but also apply and maintain transaction models at low cost.
 
 ## Chinese reader references
-[软件设计的演变过程](https://www.jianshu.com/p/18d1d582f5c2)
-[DDD分层架构的三种模式](https://www.jianshu.com/p/a775836c7e25)
-[Golang事务模型](https://www.jianshu.com/p/b7e874f6d3e8)
-[DDD在微服务物理设计中的作用](https://gitbook.cn/books/5b475fb05c0fa93ffbd1a64d/index.html)
-[Golang事务模型框架设计与应用实践](https://gitbook.cn/gitchat/activity/5b66ebf51a1f080e1c59533c)
++ [软件设计的演变过程](https://www.jianshu.com/p/18d1d582f5c2)
++ [DDD分层架构的三种模式](https://www.jianshu.com/p/a775836c7e25)
++ [Golang事务模型](https://www.jianshu.com/p/b7e874f6d3e8)
++ [DDD在微服务物理设计中的作用](https://gitbook.cn/books/5b475fb05c0fa93ffbd1a64d/index.html)
++ [Golang事务模型框架设计与应用实践](https://gitbook.cn/gitchat/activity/5b66ebf51a1f080e1c59533c)
 
 
 ## Features
@@ -39,7 +39,7 @@ In some complex domains, a business process may involve the interaction of multi
 Firstly, let's look at a transaction example.
 >During the synchronization request processing from S1 to S2, the perspective of standing at S1 is an Action, while the perspective of standing at S2 is a transaction.
 
-![](./trans-example.png "lg" "width:700px;heigth:700px")
+![](trans-example.png "lg" "width:700px;heigth:700px")
 
 ```go
 func newS1ReqTrans() *transdsl.Transaction {
