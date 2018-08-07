@@ -25,10 +25,10 @@ func (this *Loop) Exec(transInfo *TransInfo) error {
 		this.fragments[i] = this.FuncVar()
 		err := this.fragments[i].Exec(transInfo)
 		if err != nil {
-			if match(ErrBreak, this.BreakErrs) {
+			if match(err, this.BreakErrs) {
 				break
 			}
-			if match(ErrContinue, this.ContinueErrs) {
+			if match(err, this.ContinueErrs) {
 				continue
 			}
 			for j := i - 1; j >= 0; j-- {

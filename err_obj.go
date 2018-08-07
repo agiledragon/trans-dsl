@@ -6,8 +6,6 @@ import (
 
 var (
 	ErrSucc            = errors.New("trans succ")
-	ErrContinue        = errors.New("loop continue")
-	ErrBreak           = errors.New("loop break")
 	ErrUnexpectedEvent = errors.New("unexpected event")
 	ErrTimeout         = errors.New("timeout")
 )

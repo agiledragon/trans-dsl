@@ -22,6 +22,7 @@ func (this *Wait) Exec(transInfo *TransInfo) error {
 
 	select {
 	case <-transInfo.Ch:
+		transInfo.EventId = ""
 		return this.Fragment.Exec(transInfo)
 	case <-tc:
 		transInfo.EventId = ""

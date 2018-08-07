@@ -36,13 +36,13 @@ var transIds map[string]string
 var transObjs map[string]TransObj
 var key string
 
-func handleEvent(eventId string, eventContent []byte) {
+func handleEvent(eventId string, eventBody []byte) {
 	transId := transIds[key]
 	transObj := transObjs[transId]
 	trans := transObj.trans
 	transInfo := transObj.transInfo
 	stubInfo := transInfo.AppInfo.(*context.StubInfo)
-	stubInfo.EventContent = eventContent
+	stubInfo.EventBody = eventBody
 	<-time.After(50 * time.Millisecond)
 	trans.HandleEvent(eventId, transInfo)
 }

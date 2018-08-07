@@ -56,7 +56,7 @@ func TestLoopTrans(t *testing.T) {
 				},
 			}
 			err := trans.Start(transInfo)
-			So(err.Error(), ShouldEqual, "break2")
+			So(err, ShouldEqual, nil)
 			So(transInfo.AppInfo.(*context.StubInfo).LoopValue, ShouldEqual, 2)
 
 		})
@@ -69,7 +69,7 @@ func TestLoopTrans(t *testing.T) {
 				},
 			}
 			err := trans.Start(transInfo)
-			So(err.Error(), ShouldEqual, "continue2")
+			So(err, ShouldEqual, nil)
 			So(transInfo.AppInfo.(*context.StubInfo).LoopValue, ShouldEqual, 3)
 
 		})
