@@ -39,7 +39,7 @@ In some complex domains, a business process may involve the interaction of multi
 Firstly, let's look at a transaction example.
 >During the synchronization request processing from S1 to S2, the perspective of standing at S1 is an Action, while the perspective of standing at S2 is a transaction.
 
-![](trans-example.png "lg" "width:700px;heigth:700px")
+![](trans-example.png)
 
 ```go
 func newS1ReqTrans() *transdsl.Transaction {
