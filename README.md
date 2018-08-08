@@ -9,9 +9,6 @@ In some complex domains, a business process may involve the interaction of multi
 + [软件设计的演变过程](https://www.jianshu.com/p/18d1d582f5c2)
 + [DDD分层架构的三种模式](https://www.jianshu.com/p/a775836c7e25)
 + [Golang事务模型](https://www.jianshu.com/p/b7e874f6d3e8)
-+ [DDD在微服务物理设计中的作用](https://gitbook.cn/books/5b475fb05c0fa93ffbd1a64d/index.html)
-+ [Golang事务模型框架设计与应用实践](https://gitbook.cn/gitchat/activity/5b66ebf51a1f080e1c59533c)
-
 
 ## Features
 + support synchronous messages
