@@ -23,7 +23,9 @@ In some complex domains, a business process may involve the interaction of multi
 + optional
 + loop
 + retry
++ repeat
 + wait
++ concurrent
 + procedure
 + succ
 + fail
