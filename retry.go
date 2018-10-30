@@ -1,6 +1,8 @@
 package transdsl
 
-import "time"
+import (
+	"time"
+)
 
 type Retry struct {
 	MaxTimes int
@@ -10,8 +12,13 @@ type Retry struct {
 }
 
 func (this *Retry) Exec(transInfo *TransInfo) error {
+	flag := false
+	if this.MaxTimes < 0 {
+		flag = true
+	}
+	
 	var err error
-	for i := 0; i < this.MaxTimes; i++ {
+	for i := 0; flag || i < this.MaxTimes; i++ {
 		err = this.Fragment.Exec(transInfo)
 		if err == nil {
 			return nil
